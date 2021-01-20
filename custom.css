@@ -1,0 +1,71 @@
+.industry_error_message, .vip_cohort_error_message {
+  color: red;
+  margin-bottom: 8px;
+  font-weight: 700;
+  display: none;
+}
+
+.industry_error_message .show, .vip_cohort_error_message .show {
+  display: block;
+}
+
+.custom-tooltip {
+  position: relative;
+}
+
+.custom-tooltip .tooltiptext {
+  visibility: hidden;
+  text-align: center;
+  bottom: 105%;
+  left: 50%;
+  margin-left: -250px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  border-radius: 6px;
+
+  position: absolute;
+  z-index: 1;
+}
+
+#submit_button {
+  width: 100%;
+  background: #98CBC2;
+  color: #fff;
+  border-color: #98CBC2;
+  font-weight: 900;
+}
+
+#submit_button.industry-disabled {
+  background-color: #cccccc;
+  border: none;
+}
+
+.industry-disabled .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.industry-disabled:hover .tooltiptext {
+  visibility: visible;
+}
+
+.page-description {
+  text-transform: none;
+}
+
+.page-header {
+  margin: 16px 0;
+  font-size: 24px;
+}
+
+#vip_cohort_form.hide {
+  display: none;
+}
