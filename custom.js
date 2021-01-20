@@ -12,8 +12,7 @@ jQuery(function() {
   checkIfToManyIndustries();
 
   $(document).on('change', '.industry', function(event){
+      console.log("test");
       checkIfToManyIndustries();
   })
-})
-
-~
+});
