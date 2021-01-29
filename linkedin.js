@@ -159,6 +159,10 @@ $(window).load(function () {
           $("input.expertise[name='" + crmData.expertiseList[index] + "']").attr('checked', true);
       }
 
+      for (var index in crmData.vipIndustries) {
+          $("input.vip_cohort[name='" + crmData.vipIndustries[index] + "']").attr('checked', true);
+      }
+
       for (var index in crmData.desiredRoles) {
           $("input.involvement[name='" + crmData.desiredRoles[index] + "']").attr('checked', true);
           if ($("input.involvement[name='" + crmData.desiredRoles[index] + "']").length === 0 && $("input.involvement[name='Other']").is(':checked')) {
@@ -336,7 +340,7 @@ $(window).load(function () {
 
   // function createNewPerson(personDataObject) {
   function createOrUpdatePerson(personDataObject) {
-      // $.post('http://localhost:3000/people/input_form/' + globalToken,
+      // $.post('http://https://ilabscrm.com/people/input_form/' + globalToken,
       // $.post('https://tapstage.herokuapp.com/people/input_form/' + globalToken,
       $.post('https://ilabscrm.com/people/input_form/' + globalToken,
           personDataObject, successChanges
@@ -346,7 +350,8 @@ $(window).load(function () {
   function failChanges(message = null) {
       var errorMessage = "";
       if (message != null) {
-          errorMessage = "<b>" + message + "</b>";
+          errorMessage = "<b>" + message.responseText
+           + "</b>";
       } else {
           errorMessage = "<b>Something went wrong.  Please try again</b>";
       }
@@ -388,7 +393,7 @@ $(window).load(function () {
       } else {
           globalToken = token;
           $.ajax({
-              // url: 'http://localhost:3000/website/input-form/' + token,
+              // url: 'http://https://ilabscrm.com/website/input-form/' + token,
               // url: 'https://tapstage.herokuapp.com/website/input-form/' + token,
               url: 'https://ilabscrm.com/website/input-form/' + token,
               type: 'GET',
@@ -416,7 +421,7 @@ $(window).load(function () {
             redirectUrl = redirectUrl + '&token=' + globalToken
         };
 
-        // var url = 'http://localhost:3000/website/linkedin-auth';
+        // var url = 'http://https://ilabscrm.com/website/linkedin-auth';
         // var url = 'https://tapstage.herokuapp.com/website/linkedin-auth';
         var url = 'https://ilabscrm.com/website/linkedin-auth';
 
