@@ -4,13 +4,15 @@ const errorMapper = {
     email: "#email_holder",
     title: "#title_holder",
     company: "#company_holder"
-}
+  }
 
-$(window).load(function () {
+  const backendEndPoint = 'https://ilabscrm.com'
+
+  $(window).load(function () {
   var personId = null;
   var globalToken = null;
 
-// Validation Functionality
+  // Validation Functionality
   var validator = $("#input_form").validate({
       rules: {
           first_name: {required: true},
@@ -152,7 +154,8 @@ $(window).load(function () {
       }
 
       for (var index in crmData.industryList) {
-          $("input.industry[name='" + crmData.industryList[index] + "']").attr('checked', true);
+        console.log(index);
+        $("input.industry[name='" + crmData.industryList[index] + "']").attr('checked', true);
       }
 
       for (var index in crmData.expertiseList) {
@@ -182,7 +185,7 @@ $(window).load(function () {
 
   $('.vip_cohort[type="checkbox"]').change(function() {
     checkIfVipCohortSelected()
-});
+  });
 
   function checkIfVipCohortSelected() {
     if($('.vip_cohort[type="checkbox"]:checked').length === 0) {
@@ -195,20 +198,20 @@ $(window).load(function () {
   }
 
   // Enable VIP cohort form if PIC semifinalist judge or live judge are selected
-//   $('input.involvement').on('change', function(event) {
-//       checkIfPicSelected();
-//   })
+  //   $('input.involvement').on('change', function(event) {
+  //       checkIfPicSelected();
+  //   })
 
-//   function checkIfPicSelected() {
-//       if($('input.involvement[name="President’s Innovation Challenge Live Finalists Judge"]').is(":checked") ||
-//       $('input.involvement[name="President’s Innovation Challenge Semi-Finalist Judge"]').is(":checked")) {
-//         $("#vip_cohort_form").removeClass("hide")
-//       } else {
-//         $("#vip_cohort_form").addClass("hide")
-//       }
-//   }
+  //   function checkIfPicSelected() {
+  //       if($('input.involvement[name="President’s Innovation Challenge Live Finalists Judge"]').is(":checked") ||
+  //       $('input.involvement[name="President’s Innovation Challenge Semi-Finalist Judge"]').is(":checked")) {
+  //         $("#vip_cohort_form").removeClass("hide")
+  //       } else {
+  //         $("#vip_cohort_form").addClass("hide")
+  //       }
+  //   }
 
-// Form submission
+  // Form submission
   $('#submit_button').click(function () {
       validator.form();
       first_name = $('#person_first_name').val();
@@ -340,9 +343,9 @@ $(window).load(function () {
 
   // function createNewPerson(personDataObject) {
   function createOrUpdatePerson(personDataObject) {
-      // $.post('http://https://ilabscrm.com/people/input_form/' + globalToken,
+      // $.post('http://https://tapstage.herokuapp.com/people/input_form/' + globalToken,
       // $.post('https://tapstage.herokuapp.com/people/input_form/' + globalToken,
-      $.post('https://ilabscrm.com/people/input_form/' + globalToken,
+      $.post(`${backendEndPoint}/people/input_form/` + globalToken,
           personDataObject, successChanges
       ).fail(failChanges);
   }
@@ -367,10 +370,7 @@ $(window).load(function () {
       successMessage += "Thanks for your interest in the Harvard Innovation Labs.</p>";
 
       $('#input_form').trigger("reset");
-      $(".industry").prop("checked", false);
-      $(".expertise").prop("checked", false);
-      $(".involvement").prop("checked", false);
-      $(".incubators").prop("checked", false);
+      $('input[type=checkbox]:checked').attr('checked', false);
       $('#picture_frame').hide(); //clear picture frame
       $(".modal-body").html(successMessage).css('color', 'black');
       $('#exampleModalCenter').modal();
@@ -393,14 +393,15 @@ $(window).load(function () {
       } else {
           globalToken = token;
           $.ajax({
-              // url: 'http://https://ilabscrm.com/website/input-form/' + token,
+              // url: 'http://https://tapstage.herokuapp.com/website/input-form/' + token,
               // url: 'https://tapstage.herokuapp.com/website/input-form/' + token,
-              url: 'https://ilabscrm.com/website/input-form/' + token,
+              url: `${backendEndPoint}/website/input-form/` + token,
               type: 'GET',
               success: function (crmData) {
                   $(".loader").hide();
                   $("#content").show();
                   $("#footer").removeClass('empty-footer');
+                  console.log(crmData);
                   populateFormWithCRMData(crmData);
 
               }
@@ -421,9 +422,9 @@ $(window).load(function () {
             redirectUrl = redirectUrl + '&token=' + globalToken
         };
 
-        // var url = 'http://https://ilabscrm.com/website/linkedin-auth';
+        // var url = 'http://https://tapstage.herokuapp.com/website/linkedin-auth';
         // var url = 'https://tapstage.herokuapp.com/website/linkedin-auth';
-        var url = 'https://ilabscrm.com/website/linkedin-auth';
+        var url = `${backendEndPoint}/website/linkedin-auth`;
 
         $.ajax({
             type: 'POST',
@@ -481,4 +482,4 @@ $(window).load(function () {
       $('#picture_frame').show().attr('src', data.person.image);
       $('#person_remote_pic_url').val(data.person.image);
   }
-});
+  });
