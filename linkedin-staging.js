@@ -3,7 +3,8 @@ const errorMapper = {
   last_name: "#last_name_holder",
   email: "#email_holder",
   title: "#title_holder",
-  company: "#company_holder"
+  company: "#company_holder",
+  school: "#school"
 }
 
 const backendEndPoint = 'https://tapstage.herokuapp.com'
@@ -78,14 +79,12 @@ school_affiliation.change(function () {
             schoolYearSelect.append($("<option />").val(i).text(i));
 
         }
-
-        // add requirement validation to school name
+        $("#input_form").validate();
         $("#school").rules("add", {
-            required: true,
-            messages: {
-                required: "Required input",
-                minlength: jQuery.validator.format("Please select a school.")
-            }
+          required: true,
+          messages: {
+              required: "Please select a school."
+          }
         });
     } else {
         $('#school_year').val("");
@@ -154,7 +153,6 @@ function populateFormWithCRMData(crmData) {
     }
 
     for (var index in crmData.industryList) {
-      console.log(index);
       $("input.industry[name='" + crmData.industryList[index] + "']").attr('checked', true);
     }
 
@@ -203,8 +201,8 @@ function checkIfVipCohortSelected() {
 //   })
 
 //   function checkIfPicSelected() {
-//       if($('input.involvement[name="President’s Innovation Challenge Live Finalists Judge"]').is(":checked") ||
-//       $('input.involvement[name="President’s Innovation Challenge Semi-Finalist Judge"]').is(":checked")) {
+//       if($('input.involvement[name="Presidentâ€™s Innovation Challenge Live Finalists Judge"]').is(":checked") ||
+//       $('input.involvement[name="Presidentâ€™s Innovation Challenge Semi-Finalist Judge"]').is(":checked")) {
 //         $("#vip_cohort_form").removeClass("hide")
 //       } else {
 //         $("#vip_cohort_form").addClass("hide")

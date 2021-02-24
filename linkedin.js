@@ -465,6 +465,7 @@ const errorMapper = {
       } else {
           redirectUrl = redirectUrlRoot;
       }
+
       // const clientId = '86u7n8320kdu1n'; TEST APP
       const clientId = '77awl1kp5d4jh9';
       let scope = 'r_liteprofile%20r_emailaddress%20w_member_social';
